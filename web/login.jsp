@@ -8,6 +8,8 @@
     </head>
     
     <body>
+        <div class="wrap"> <!-- div to hold all other divs -->
+
         <%@include file="includes/header.jsp" %>
         
         <%@include file="includes/loginNav.jsp" %>
@@ -32,5 +34,6 @@
         </form>
         </div>
         <%@include file="includes/footer.jsp" %>
+        </div>
     </body>
 </html>

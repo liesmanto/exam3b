@@ -8,11 +8,13 @@
         <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
     </head>
     <body>
+        <div class="wrap"> <!-- div to hold all other divs -->
         <%@include file="includes/header.jsp" %>
         
         <%@include file="includes/nav.jsp" %>
         
         <div class="main">
+
         <h1>Add A Customer</h1>
         
         <form name="addForm" action="addCustomer" method="post">
@@ -61,5 +63,6 @@
         </form>
         </div>
         <%@include file="includes/footer.jsp" %>
+        </div>
     </body>
 </html>

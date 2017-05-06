@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
     </head>
     <body>
+        <div class="wrap">
         
         <%@include file="includes/header.jsp" %>
         
@@ -68,6 +69,7 @@
             </form>
         </div>
      </div>
-     <%@include file="includes/footer.jsp" %>          
+     <%@include file="includes/footer.jsp" %>      
+        </div>
     </body>
 </html>
