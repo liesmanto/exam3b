@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Natasha's Exam 3b</title>
         <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
     </head>
     <body>
