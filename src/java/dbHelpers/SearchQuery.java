@@ -63,22 +63,50 @@ public class SearchQuery {
         }
     }
     
-    public String getHTMLtable(){
+    public String getHTMLTable(){
         
         String table = "";
         
         table += "<table>";
         
         table += "<tr>";
-            table += "<th>Customer ID</th>";
-            table += "<th>First Name</th>";
-            table += "<th>Last Name</th>";
-            table += "<th>Address 1</th>";
-            table += "<th>Address 2</th>";
-            table += "<th>City</th>";
-            table += "<th>State</th>";
-            table += "<th>Zip</th>";
-            table += "<th>Email Address</th>";
+
+            table += "<th>";
+            table += "ID"; 
+            table += "</th>";
+                
+            table += "<th>";
+            table += "Name";
+            table += "</th>";
+                
+            table += "<th>";
+            table += "Address 1";
+            table += "</th>";
+
+            table += "<th>";
+            table += "Address 2";
+            table += "</th>";
+
+            table += "<th>";
+            table += "City";
+            table += "</th>";
+
+            table += "<th>";
+            table += "State";
+            table += "</th>";
+
+            table += "<th>";
+            table += "Zip Code";
+            table += "</th>";
+
+            table += "<th>";
+            table += "Email Address";
+            table += "</th>";
+            
+            table += "<th>";
+            table += "Update/Delete";
+            table += "</th>";
+            
         table += "</tr>";
         
         try {

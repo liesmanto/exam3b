@@ -67,7 +67,7 @@ public class Read extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-                 //Create a ReadQuery helper object
+                //Create a ReadQuery helper object
                 ReadQuery rq = new ReadQuery();
 
                 //Get the HTML table from the ReadQuery object

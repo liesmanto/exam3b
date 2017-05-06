@@ -12,22 +12,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Customers;
 
-public class ReadQuery {
+public class UserSearchQuery {
     private Connection conn;
     private ResultSet results;
     
-    public ReadQuery() {
+    public UserSearchQuery(){
+      
         Properties props = new Properties();
         InputStream instr = getClass().getResourceAsStream("dbConn.properties");
         try {
             props.load(instr);
         } catch (IOException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserSearchQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             instr.close();
         } catch (IOException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserSearchQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         String driver = props.getProperty("driver.name");
@@ -37,27 +38,34 @@ public class ReadQuery {
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserSearchQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             conn = DriverManager.getConnection(url, username, passwd);
         } catch (SQLException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserSearchQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
     
-    public void doRead() {
+    public void doSearch (String firstName, String lastName){
+        
         try {
-            String query = "Select * FROM CUSTOMERS ORDER BY custID ASC";
+            String query = "SELECT * FROM CUSTOMERS WHERE UPPER(firstName) LIKE ? OR UPPER (LastName) LIKE ? ORDER BY custID ASC";
+            
             PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, "%" + firstName.toUpperCase() + "%");
+            ps.setString(2, "%" + lastName.toUpperCase() + "%");
             this.results = ps.executeQuery();
         } catch (SQLException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserSearchQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public String getHTMLTable() {
+    public String getHTMLTable(){
+        
         String table = "";
+        
         table += "<table>";
         
         table += "<tr>";
@@ -94,14 +102,11 @@ public class ReadQuery {
             table += "Email Address";
             table += "</th>";
             
-            table += "<th>";
-            table += "Update/Delete";
-            table += "</th>";
-            
         table += "</tr>";
         
         try {
-            while(this.results.next()) {
+            while(this.results.next()){
+                
                 Customers customer = new Customers();
                 customer.setCustID(this.results.getInt("custID"));
                 customer.setFirstName(this.results.getString("firstName"));
@@ -112,54 +117,51 @@ public class ReadQuery {
                 customer.setState(this.results.getString("state"));
                 customer.setZip(this.results.getString("zip"));
                 customer.setEmailAddr(this.results.getString("emailAddr"));
-                
-                table += "<tr>";
-                
-                table += "<td>";
-                table += customer.getCustID();
-                table += "</td>";
-               
-                table += "<td>";
-                table += customer.getFirstName();
-                table += " ";
-                table += customer.getLastName();
-                table += "</td>";
-                
-                table += "<td>";
-                table += customer.getAddrOne();
-                table += "</td>";
-                
-                table += "<td>";
-                table += customer.getAddrTwo();
-                table += "</td>";               
 
-                table += "<td>";
-                table += customer.getCity();
-                table += "</td>";              
+            
+                table += "<tr>";               
+                
+                    table += "<td>";
+                    table += customer.getCustID();
+                    table += "</td>";
 
-                table += "<td>";
-                table += customer.getState();
-                table += "</td>";
-                
-                table += "<td>";
-                table += customer.getZip();
-                table += "</td>";
-                
-                table += "<td>";
-                table += customer.getEmailAddr();
-                table += "</td>";
-                
-                table += "<td>";
-                table += "<a href=update?custID=" + customer.getCustID()+ "> Update </a>" + "<a href=delete?custID=" + customer.getCustID() + "> Delete </a>";
-                table += "</td>";
-                
-                table += "</tr>";
+                    table += "<td>";
+                    table += customer.getFirstName();
+                    table += " ";
+                    table += customer.getLastName();
+                    table += "</td>";
+
+                    table += "<td>";
+                    table += customer.getAddrOne();
+                    table += "</td>";
+
+                    table += "<td>";
+                    table += customer.getAddrTwo();
+                    table += "</td>";               
+
+                    table += "<td>";
+                    table += customer.getCity();
+                    table += "</td>";              
+
+                    table += "<td>";
+                    table += customer.getState();
+                    table += "</td>";
+
+                    table += "<td>";
+                    table += customer.getZip();
+                    table += "</td>";
+
+                    table += "<td>";
+                    table += customer.getEmailAddr();
+                    table += "</td>";
+
+                table += "</tr>";                                                                         
             }
+                
         } catch (SQLException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserSearchQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        table +="</table>";
-        return table;
+            table += "</table>";
+            return table;            
     }
 }

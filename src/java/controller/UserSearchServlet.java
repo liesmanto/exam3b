@@ -1,7 +1,7 @@
-
 package controller;
 
 import dbHelpers.SearchQuery;
+import dbHelpers.UserSearchQuery;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "SearchServlet", urlPatterns = {"/search"})
-public class SearchServlet extends HttpServlet {
+@WebServlet(name = "UserSearchServlet", urlPatterns = {"/userSearch"})
+public class UserSearchServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,10 +31,10 @@ public class SearchServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SearchServlet</title>");            
+            out.println("<title>Servlet UserSearchServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SearchServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UserSearchServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -72,7 +72,7 @@ public class SearchServlet extends HttpServlet {
                 String lastName = request.getParameter("searchVal");
 
                 //Create a SearchQuery helper object
-                SearchQuery sq = new SearchQuery();
+                UserSearchQuery sq = new UserSearchQuery();
 
                 //Get the HTML table from the SearchQuery object
                 sq.doSearch(firstName, lastName);
@@ -80,11 +80,11 @@ public class SearchServlet extends HttpServlet {
 
                 //Pass execution control to read.jsp along with the table
                 request.setAttribute("table", table);
-                String url = "/read.jsp";
+                String url = "/userRead.jsp";
 
                 RequestDispatcher dispatcher = request.getRequestDispatcher(url);
                 dispatcher.forward(request, response);
-        
+
     }
 
     /**

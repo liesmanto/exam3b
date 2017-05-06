@@ -5,8 +5,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
     </head>
     <body>
+        <%@include file="includes/header.jsp" %>
+        
+        <%@include file="includes/nav.jsp" %>
+        
+        <div class="main">
         <h1>Add A Player</h1>
         
         <form name="addForm" action="addCustomer" method="post">
@@ -53,5 +59,7 @@
             </table>
             <input type="submit" name="submit" value="Submit"/>
         </form>
+        </div>
+        <%@include file="includes/footer.jsp" %>
     </body>
 </html>

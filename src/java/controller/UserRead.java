@@ -1,7 +1,6 @@
-
 package controller;
 
-import dbHelpers.SearchQuery;
+import dbHelpers.UserReadQuery;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -11,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "SearchServlet", urlPatterns = {"/search"})
-public class SearchServlet extends HttpServlet {
+@WebServlet(name = "UserRead", urlPatterns = {"/userRead"})
+public class UserRead extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,10 +30,10 @@ public class SearchServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SearchServlet</title>");            
+            out.println("<title>Servlet UserRead</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SearchServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UserRead at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -66,25 +65,20 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+                
+                //Create a ReadQuery helper object
+                UserReadQuery urq = new UserReadQuery();
 
-                //Get the text to search
-                String firstName = request.getParameter("searchVal");
-                String lastName = request.getParameter("searchVal");
+                //get the HTML table from the ReadQuery object
+                urq.doRead();
+                String table = urq.getHTMLTable();
 
-                //Create a SearchQuery helper object
-                SearchQuery sq = new SearchQuery();
-
-                //Get the HTML table from the SearchQuery object
-                sq.doSearch(firstName, lastName);
-                String table = sq.getHTMLTable();
-
-                //Pass execution control to read.jsp along with the table
+                //Pass execution control to read.jsp along with the table.
                 request.setAttribute("table", table);
-                String url = "/read.jsp";
+                String url = "/userRead.jsp";
 
                 RequestDispatcher dispatcher = request.getRequestDispatcher(url);
                 dispatcher.forward(request, response);
-        
     }
 
     /**

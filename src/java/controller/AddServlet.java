@@ -70,7 +70,6 @@ public class AddServlet extends HttpServlet {
             throws ServletException, IOException {
 
                 //get the data
-        
                 String firstName = request.getParameter("firstName");
                 String lastName = request.getParameter("lastName");
                 String addr1 = request.getParameter("addrOne");
