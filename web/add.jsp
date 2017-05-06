@@ -13,7 +13,7 @@
         <%@include file="includes/nav.jsp" %>
         
         <div class="main">
-        <h1>Add A Player</h1>
+        <h1>Add A Customer</h1>
         
         <form name="addForm" action="addCustomer" method="post">
             <table class="add">

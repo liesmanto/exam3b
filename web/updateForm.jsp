@@ -16,7 +16,7 @@
         
         <div class="main">
             <div class="updateForm">
-
+            <h1>Update Customer</h1>
             <form name="updateForm" action="updateCustomer" method="post">
 
                 <table class="add">

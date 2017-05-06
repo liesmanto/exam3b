@@ -13,7 +13,7 @@
         <%@include file="includes/loginNav.jsp" %>
         
         <div class="main">
-        <h1>Add A Player</h1>
+        <h1>Log In</h1>
         
         <form name="addForm" action="adminIndex.jsp" method="post">
             <table class="add">
